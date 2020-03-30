@@ -4,25 +4,39 @@ import { Root, View, Panel, PanelHeader, Header, Group, Cell, CellButton } from 
 import '@vkontakte/vkui/dist/vkui.css';
 import bridge from "@vkontakte/vk-bridge";
 
-bridge.send('VKWebAppInit', {});
-bridge.send("VKWebAppGetUserInfo", {});
-bridge.subscribe((e) => {
-    switch (e.detail.type) {
-       case 'VKWebAppGetUserInfoResult' :
-          this.bindConnectUserData(e.detail.data);
-          break;
-    }
- });
 
 
 class HW extends React.Component {
     constructor(props) {
       super(props);
-  
+      
       this.state = {
-        activeView: 'view1'
+        activeView: 'view1',
+        name: '',
+        info: ''
       }
+      this.onClick = this.onClick.bind(this);
+      
     }
+    onClick(e) {
+        e.preventDefault();
+        bridge.send("VKWebAppInit", {});
+        bridge.subscribe((e) => {
+          switch (e.detail.type) {
+            case "VKWebAppGetUserInfoResult" :
+              this.bindConnectUserData(e.detail.data);
+              this.setState(prevState => ({
+                name: e.detail.data.first_name
+              }))
+              break;
+          }
+        });
+        this.setState(prevState => ({
+          info: 'sjfgjsdjjgd'
+        }))
+    }
+    
+    
     
     render() {
       return (
@@ -32,7 +46,7 @@ class HW extends React.Component {
               <PanelHeader>View 1</PanelHeader>
               <Group>
                 <CellButton onClick={ () => this.setState({ activeView: 'view2' }) }>
-                  {e.detail.data.id}
+                  View 2
                 </CellButton>
               </Group>
             </Panel>
@@ -41,8 +55,10 @@ class HW extends React.Component {
             <Panel id="panel2.1">
               <PanelHeader>View 2</PanelHeader>
               <Group>
-                <CellButton onClick={ () => this.setState({ activeView: 'view1' }) }>
+                <CellButton onClick={this.onClick}>
                   Back to View 1
+                  {this.state.info}
+                  {this.state.name}
                 </CellButton>
               </Group>
             </Panel>
@@ -54,4 +70,4 @@ class HW extends React.Component {
   
 
 //ReactDOM.render(<HW />, document.getElementById('root'));
-export default HW;
+export default HW; 
