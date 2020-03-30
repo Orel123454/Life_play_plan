@@ -21,12 +21,13 @@ class HW extends React.Component {
     onClick(e) {
         e.preventDefault();
         bridge.send("VKWebAppInit", {});
+        e = bridge.send("VKWebAppGetUserInfo", {});
         bridge.subscribe((e) => {
           switch (e.detail.type) {
             case "VKWebAppGetUserInfoResult" :
               this.bindConnectUserData(e.detail.data);
               this.setState(prevState => ({
-                name: e.detail.data.first_name
+                name: "e.detail.data.first_name"
               }))
               break;
           }
