@@ -4,7 +4,16 @@ import { Root, View, Panel, PanelHeader, Header, Group, Cell, CellButton } from 
 import '@vkontakte/vkui/dist/vkui.css';
 import bridge from "@vkontakte/vk-bridge";
 
-var st = bridge.send("VKWebAppGetUserInfo", {});
+bridge.send('VKWebAppInit', {});
+bridge.send("VKWebAppGetUserInfo", {});
+bridge.subscribe((e) => {
+    switch (e.detail.type) {
+       case 'VKWebAppGetUserInfoResult' :
+          this.bindConnectUserData(e.detail.data);
+          break;
+    }
+ });
+
 
 class HW extends React.Component {
     constructor(props) {
@@ -23,7 +32,7 @@ class HW extends React.Component {
               <PanelHeader>View 1</PanelHeader>
               <Group>
                 <CellButton onClick={ () => this.setState({ activeView: 'view2' }) }>
-                  {st.data.id}
+                  {e.detail.data.id}
                 </CellButton>
               </Group>
             </Panel>
