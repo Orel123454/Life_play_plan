@@ -31,7 +31,7 @@ class HW extends React.Component {
               <Group>
                 <CellButton onClick={ () => this.setState({ activeView: 'view2' }) }>
                   View 2
-                  <Help />
+                  <App />
                 </CellButton>
               </Group>
             </Panel>
@@ -40,7 +40,7 @@ class HW extends React.Component {
             <Panel id="panel2.1">
               <PanelHeader>View 2</PanelHeader>
               <Group>
-                <CellButton onClick={() => this.setState({ activeView: 'view1' })}>
+                <CellButton onClick={() => this.setState({ activeView: 'view2' })}>
                   Back to View 1
                 </CellButton>
               </Group>
