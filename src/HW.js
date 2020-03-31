@@ -1,9 +1,10 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import { Root, View, Panel, PanelHeader, Header, Group, Cell, CellButton } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import bridge from "@vkontakte/vk-bridge";
-
+import App from './App'
+import Help from './Help'
 
 
 class HW extends React.Component {
@@ -15,18 +16,9 @@ class HW extends React.Component {
         name: '',
         info: ''
       }
-      this.onClick = this.onClick.bind(this);
       
     }
-    onClick(e) {
-        e.preventDefault();
-        bridge.send("VKWebAppInit", {});
-        bridge.send("VKWebAppGetUserInfo", {});
-        this.setState(prevState => ({
-          info: 'sjfgjsdjjgd',
-          name: e.detail.data.first_name
-        }))
-    }
+
     
     
     
@@ -39,6 +31,7 @@ class HW extends React.Component {
               <Group>
                 <CellButton onClick={ () => this.setState({ activeView: 'view2' }) }>
                   View 2
+                  <Help />
                 </CellButton>
               </Group>
             </Panel>
@@ -47,10 +40,8 @@ class HW extends React.Component {
             <Panel id="panel2.1">
               <PanelHeader>View 2</PanelHeader>
               <Group>
-                <CellButton onClick={this.onClick}>
+                <CellButton onClick={() => this.setState({ activeView: 'view1' })}>
                   Back to View 1
-                  {this.state.info}
-                  {this.state.name}
                 </CellButton>
               </Group>
             </Panel>
@@ -59,7 +50,7 @@ class HW extends React.Component {
       )
     }
 }
-  
+// ReactDOM.render(<HW />, document.getElementById('root'));
+// 
 
-//ReactDOM.render(<HW />, document.getElementById('root'));
 export default HW; 
