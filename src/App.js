@@ -25,7 +25,7 @@ const App = () => {
 		async function fetchData() {
 			const user = await bridge.send('VKWebAppGetUserInfo');
 			bridge.send("VKWebAppStorageSet", {"key": "example", "value": "СУКАААААААААААААААААААААААААААА"});
-			bridge.send("VKWebAppStorageGet", {"keys": ["example"]}).then(e => console.log(e.data.keys));;
+			bridge.send("VKWebAppStorageGet", {"keys": ["example"]}).then(e => setHelp("CERF"));;
 			setUser(user);
 			setPopout(null);
 		}
