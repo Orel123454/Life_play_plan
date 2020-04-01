@@ -28,8 +28,8 @@ const App = () => {
 			// bridge.send("VKWebAppGetUserInfo", {}).then(e => setHelp("dsdaadsads"));
 			
 			setUser(user);
-			const user2 = await bridge.send("VKWebAppStorageGet", {"keys": ["example"]});
-			setHelp(user2);
+			// const user2 = await bridge.send("VKWebAppStorageGet", {"keys": ["example"]});
+			// setHelp(user2);
 			setPopout(null);
 		}
 		fetchData();
