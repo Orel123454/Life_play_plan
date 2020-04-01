@@ -1,18 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import "core-js/features/map";
+import "core-js/features/set";
+import React from "react";
+import ReactDOM from "react-dom";
 import bridge from "@vkontakte/vk-bridge";
-import App from './App';
-import { RouterProvider } from 'react-router5'
-import createRouter from './create-router'
+import App from "./App";
 
-bridge.send('VKWebAppInit', {});
+// Init VK  Mini App
+bridge.send("VKWebAppInit");
 
-const router = createRouter()
-
-router.start(() => {
-    ReactDOM.render((
-        <RouterProvider router={router}>
-            <App router={router}/>
-        </RouterProvider>
-    ), document.getElementById('root'))
-})
+ReactDOM.render(<App />, document.getElementById("root"));
+if (process.env.NODE_ENV === "development") {
+  import("./eruda").then(eruda => {}); //runtime download
+}
