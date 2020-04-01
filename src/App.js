@@ -10,8 +10,9 @@ import Persik from './panels/Persik';
 const App = () => {
 	const [activePanel, setActivePanel] = useState('home');
 	const [fetchedUser, setUser] = useState(null);
-	const [Help] = useState(null);
+	const [Help, setHelp] = useState("Плохо(");
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
+
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -24,7 +25,7 @@ const App = () => {
 		async function fetchData() {
 			const user = await bridge.send('VKWebAppGetUserInfo');
 			bridge.send("VKWebAppStorageSet", {"key": "example", "value": "fdsadfs"});
-			bridge.send("VKWebAppStorageGetKeys", {"count": 20, "offset": 0}).then(e => this.setState({Help: e.data.keys}));
+			bridge.send("VKWebAppStorageGetKeys", {"count": 20, "offset": 0}).then(e => setHelp("СУКАААААААААААААААААААА"));
 			setUser(user);
 			setPopout(null);
 		}
