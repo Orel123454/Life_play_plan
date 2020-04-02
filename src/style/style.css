@@ -1,0 +1,60 @@
+.PanelHeader{
+    background-color: #94B3AF;
+    color: #FFF;
+
+}
+.PanelHeader .PanelHeader-content span{
+    color: #FFF;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 24px;
+}
+#pr .Panel__in{
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 15%;
+    background: #D8E4E2;
+}
+.Tabbar {
+    background: #94B3AF;
+}
+#magaz .Panel__in{
+    display: flex;
+    /* justify-content: flex-start; */
+    padding-top: 15%;
+    background: #D8E4E2;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#magaz .Cell{
+    height: 10%;
+}
+#ng .Panel__in{
+    display: flex;
+    /* justify-content: flex-start; */
+    padding-top: 15%;
+    background: #D8E4E2;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#ng .Cell{
+    height: 10%;
+}
+#cal .Panel__in{
+    display: flex;
+    /* justify-content: flex-start; */
+    padding-top: 15%;
+    background: #D8E4E2;
+}
+#glav .View__header{
+    display: none;
+}
+#panel1 .Panel__in{
+    display:flex;
+    flex-wrap: wrap;
+}
+#panel2 .Panel__in{
+    display:flex;
+    flex-wrap: wrap;
+}

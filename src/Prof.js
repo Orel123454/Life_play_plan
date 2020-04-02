@@ -4,15 +4,11 @@ import View from '@vkontakte/vkui/dist/components/View/View';
 import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenSpinner';
 import '@vkontakte/vkui/dist/vkui.css';
 
-import Home from './panels/Home';
-import Persik from './panels/Persik';
+import User from './panels/User';
 
-const App = () => {
-	const [activePanel, setActivePanel] = useState('home');
+const Prof = () => {
 	const [fetchedUser, setUser] = useState(null);
-	const [Help, setHelp] = useState(null);
 	const [popout, setPopout] = useState(<ScreenSpinner size='large' />);
-
 
 	useEffect(() => {
 		bridge.subscribe(({ detail: { type, data }}) => {
@@ -24,28 +20,16 @@ const App = () => {
 		});
 		async function fetchData() {
 			const user = await bridge.send('VKWebAppGetUserInfo');
-			bridge.send("VKWebAppStorageSet", {"key": "example", "value": "СУКАААААААААААААААААААААААААААА"});
-			// bridge.send("VKWebAppGetUserInfo", {}).then(e => setHelp("dsdaadsads"));
-			
 			setUser(user);
-			const user2 = await bridge.send("VKWebAppStorageGet", {"keys": ["example"]});
-			setHelp(user2);
 			setPopout(null);
 		}
 		fetchData();
 	}, []);
 
-	const go = e => {
-		setActivePanel(e.currentTarget.dataset.to);
-	};
-
 	return (
-		<View activePanel={activePanel} popout={popout}>
-			<Home id='home' fetchedUser={fetchedUser} go={go} Help={Help}/>
-			<Persik id='persik' go={go} />
-		</View>
+		<User id='home' fetchedUser={fetchedUser} />
 	);
 }
 
-export default App;
+export default Prof;
 
